@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title th:text="${add} ? 'Create a Contact' : 'Edit a Contact'" />
+        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    </head>
+    <body>
+        <h1 th:text="${add} ? 'Create a Contact:' : 'Edit a Contact:'" />
+        <a th:href="@{/contacts}">Back to Contact List</a>
+        <br/><br/>
+        <form th:action="@{/adresse/add}"
+              th:object="${adresse}" method="POST">
+            <table border="0">
+                <tr th:if="${adresse.id}">
+                    <td>ID</td>
+                    <td>:</td>
+                    <td th:utext="${adresse.id}">...</td>
+                </tr>
+                <tr>
+                    <td>Phone contact</td>
+                    <td>:</td>
+                    <td><input type="text" th:field="*{phone}" size="50" /></td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td>:</td>
+                    <td><input type="text" th:field="*{address1}" size="50" /></td>              
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><input type="text" th:field="*{address2}" size="50" /></td>              
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><input type="text" th:field="*{address3}" size="50" /></td>              
+                </tr>
+                <tr>
+                    <td>Postal Code</td>
+                    <td>:</td>
+                    <td><input type="text" th:field="*{postalCode}" /></td>              
+                </tr>
+                <tr>
+                    <td>Notes</td>
+                    <td>:</td>
+                    <td><textarea th:field="*{note}" rows="4" cols="50" /></td>
+                </tr>
+            </table>
+            <input type="submit" th:value="${add} ? 'Create' : 'Update'" />
+        </form>
+
+        <br/>
+        <!-- Check if errorMessage is not null and not empty -->       
+        <div th:if="${errorMessage}" th:utext="${errorMessage}" class="error" />       
+    </body>
+</html>
